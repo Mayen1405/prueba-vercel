@@ -6,12 +6,12 @@ import productRoutes from '../src/product/product.routes.js';
 import authRoutes from '../src/auth/auth.routes.js';
 import userRoutes from '../src/user/user.routes.js';
 import accountRoutes from '../src/account/account.routes.js';
-import transactionRoutes from '../src/transaction/transaction.routes.js';
+import transactionRoutes from '../src/transactions/transaction.routes.js';
 import currencyRoutes from '../src/currency/currency.routes.js';
-import dbConnection from './db.js';
-import defaultData from './defaultData.js';
-import createDefaultProducts from './defaultProducts.js';
-import createDefaultAccounts from './defaultAccounts.js';
+import dbConnection from './mongo.js';
+import defaultData from './default-data.js';
+import createDefaultProducts from './default-products.js';
+import createDefaultAccounts from './default-accounts.js';
 
 const middlewares = (app) => {
     app.use(express.json());
@@ -41,7 +41,7 @@ const connectDB = async () => {
         await createDefaultAccounts();
     } catch (error) {
         console.error("Database connection failed:", error);
-        process.exit(1);
+        throw error;
     }
 };
 
