@@ -1,7 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import apiLimiter from '../src/middlewares/rate-limit-validator.js'; // Importación corregida
+import apiLimiter from '../src/middlewares/rate-limit-validator.js';
 
 import productRoutes from '../src/product/product.routes.js';
 import authRoutes from '../src/auth/auth.routes.js';
@@ -19,7 +19,7 @@ const middlewares = (app) => {
     app.use(express.urlencoded({ extended: true }));
     app.use(helmet());
     app.use(morgan("dev"));
-    app.use(apiLimiter); // Middleware de rate limit
+    app.use(apiLimiter);
 };
 
 const routes = (app) => {
@@ -49,7 +49,12 @@ const connectDB = async () => {
 export const buildApp = async () => {
     const app = express();
     middlewares(app);
-    await connectDB();
+    try {
+        await connectDB();
+    } catch (error) {
+        console.error("Error al conectar a la base de datos:", error);
+        // Continuamos con la aplicación incluso si falla la conexión
+    }
     routes(app);
     return app;
 };
