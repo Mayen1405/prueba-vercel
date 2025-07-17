@@ -10,7 +10,7 @@ import accountRoutes from '../src/account/account.routes.js';
 import transactionRoutes from '../src/transactions/transaction.routes.js';
 import currencyRoutes from '../src/currency/currency.routes.js';
 import { dbConnection } from './mongo.js';
-import { defaultData } from './default-data.js';
+import defaultData from './default-data.js'; // Corregido: importación como default export
 import { createDefaultProducts } from './default-products.js';
 import { createDefaultAccounts } from './default-accounts.js';
 
