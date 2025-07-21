@@ -16,6 +16,10 @@ import currencyRoutes from "../src/currency/currency.routes.js";
 
 const app = express();
 
+app.get('/', (req, res) => {
+  res.send('API Backend funcionando 🚀');
+});
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors({
